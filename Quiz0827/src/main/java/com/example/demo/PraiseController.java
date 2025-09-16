@@ -20,7 +20,7 @@ import lombok.RequiredArgsConstructor;
 public class PraiseController {
 
 	private final PraiseService praiseService; //의존성 주입
-	
+	 
 // 단순 "praises/list"_html 보여주는 로직
 //	@GetMapping("/praises")
 //	public String praises() {
