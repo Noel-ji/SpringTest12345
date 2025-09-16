@@ -1,0 +1,42 @@
+<!-- /resources/templates/praises/edit-form.html -->
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>칭찬 수정하기</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css" />
+    <style> body { font-family: 'Pretendard', sans-serif; } </style>
+</head>
+<body class="bg-yellow-50 min-h-screen flex items-center justify-center">
+    <div class="w-full max-w-lg p-8 space-y-6 bg-white rounded-xl shadow-lg">
+        <h1 class="text-3xl font-bold text-gray-800 text-center">칭찬 수정하기</h1>
+        <form th:action="@{/praises/{id}/edit(id=${praise.id})}" th:object="${praise}" method="post" class="space-y-5">
+            <div>
+                <label for="praiser" class="block text-sm font-medium text-gray-700">칭찬해 준 사람</label>
+                <input type="text" id="praiser" th:field="*{praiser}" class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-orange-500 focus:border-orange-500" required>
+            </div>
+            <div>
+                <label for="praisedAt" class="block text-sm font-medium text-gray-700">칭찬받은 날짜</label>
+                <input type="date" id="praisedAt" th:field="*{praisedAt}" th:value="${#temporals.format(praise.praisedAt, 'yyyy-MM-dd')}" class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-orange-500 focus:border-orange-500" required>
+            </div>
+            <div>
+                <label for="content" class="block text-sm font-medium text-gray-700">칭찬 내용</label>
+                <textarea id="content" th:field="*{content}" rows="5" class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-orange-500 focus:border-orange-500" required></textarea>
+            </div>
+            <div class="flex items-center justify-between pt-4">
+                <!-- 삭제는 POST 요청으로 처리하는 것이 RESTful 원칙에 더 맞습니다. -->
+                
+                <div class="space-x-3">
+                    <a th:href="@{/praises}" class="px-5 py-2 text-sm font-medium text-gray-700 bg-gray-200 rounded-md hover:bg-gray-300">취소</a>
+                    <button type="submit" class="px-5 py-2 text-sm font-semibold text-white bg-orange-500 rounded-md hover:bg-orange-600">수정 완료</button>
+                </div>
+            </div>
+        </form>
+		<!--수정폼 밖에 있어야 작동함.-->
+		<form th:action="@{/praises/{id}/delete(id=${praise.id})}" method="post" onsubmit="return confirm('정말로 이 칭찬 기록을 삭제할 건가요?')">
+            <button type="submit" class="px-5 py-2 text-sm font-medium text-white bg-red-500 rounded-md hover:bg-red-600">삭제하기</button>
+        </form>
+    </div>
+</body>
+</html>

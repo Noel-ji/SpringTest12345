@@ -1,0 +1,34 @@
+<!-- /resources/templates/praises/new-praise-form.html -->
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>새 칭찬 기록하기</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css" />
+    <style> body { font-family: 'Pretendard', sans-serif; } </style>
+</head>
+<body class="bg-yellow-50 min-h-screen flex items-center justify-center">
+    <div class="w-full max-w-lg p-8 space-y-6 bg-white rounded-xl shadow-lg">
+        <h1 class="text-3xl font-bold text-gray-800 text-center">새 칭찬 기록하기</h1>
+        <form th:action="@{/praises/new}" th:object="${praise}" method="post" class="space-y-5">
+            <div>
+                <label for="praiser" class="block text-sm font-medium text-gray-700">칭찬해 준 사람</label>
+                <input type="text" id="praiser" th:field="*{praiser}" class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-orange-500 focus:border-orange-500" required>
+            </div>
+            <div>
+                <label for="praisedAt" class="block text-sm font-medium text-gray-700">칭찬받은 날짜</label>
+                <input type="date" id="praisedAt" th:field="*{praisedAt}" class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-orange-500 focus:border-orange-500" required>
+            </div>
+            <div>
+                <label for="content" class="block text-sm font-medium text-gray-700">칭찬 내용</label>
+                <textarea id="content" th:field="*{content}" rows="5" class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-orange-500 focus:border-orange-500" required></textarea>
+            </div>
+            <div class="flex items-center justify-end space-x-3 pt-4">
+                <a th:href="@{/praises}" class="px-5 py-2 text-sm font-medium text-gray-700 bg-gray-200 rounded-md hover:bg-gray-300">취소</a>
+                <button type="submit" class="px-5 py-2 text-sm font-semibold text-white bg-orange-500 rounded-md hover:bg-orange-600">저장하기</button>
+            </div>
+        </form>
+    </div>
+</body>
+</html>
